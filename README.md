@@ -52,6 +52,25 @@ coreNLP.process('This is so good.', function(err, result) {
 
 **Warning!** If you didn't initialize the class without callback function then you will meet `'Load a pipeline first.'` error. So you have to do it with callback function or call `loadPipeline(options, callback)` function seperately.
 
+## 中文
+从[这个页面](http://nlp.stanford.edu/software/corenlp.shtml#History)上下载对应的中文包[stanford-chinese-corenlp-2014-02-24-models.jar](http://nlp.stanford.edu/software/stanford-chinese-corenlp-2014-02-24-models.jar)，并下载[StanfordCoreNLP-chinese.properties](https://github.com/stanfordnlp/CoreNLP/raw/master/src/edu/stanford/nlp/pipeline/StanfordCoreNLP-chinese.properties)，放到固定目录中，并在初始化时用`language`参数说明上述两个文件的位置
+
+```javascript
+var NLP = require('stanford-corenlp');
+
+var coreNLP = new NLP.StanfordNLP({
+  "nlpPath": "./corenlp",
+  "version": "3.4",
+  language: {
+    jar: './corenlp/stanford-chinese-corenlp-2014-02-24-models.jar',
+    properties: './corenlp/StanfordCoreNLP-chinese.properties'
+  }
+}, function (err) {
+  coreNLP.process('驼峰摘要是首个提供中文摘要的开放API服务。', function (err, result) {
+    console.log(err, JSON.stringify(result));
+  });
+});
+```
 
 ## License
 This program is free software: you can redistribute it and/or modify
